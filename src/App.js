@@ -1,28 +1,82 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { AgGridReact } from 'ag-grid-react';
+import 'ag-grid-community/dist/styles/ag-grid.css';
+import 'ag-grid-community/dist/styles/ag-theme-balham.css';
+import rowData from './olympicWinners';
+
+const gridClassName = "ag-theme-balham";
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+            columnDefs: [
+                {
+                    headerName: "Athlete",
+                    field: "athlete",
+                    minWidth: 150
+                },
+                {
+                    headerName: "Age",
+                    field: "age",
+                    minWidth: 90
+                },
+                {
+                    headerName: "Country",
+                    field: "country"
+                },
+                {
+                    headerName: "Year",
+                    field: "year"
+                },
+                {
+                    headerName: "Date",
+                    field: "date"
+                },
+                {
+                    headerName: "Sport",
+                    field: "sport"
+                },
+                {
+                    headerName: "Gold",
+                    field: "gold"
+                },
+                {
+                    headerName: "Silver",
+                    field: "silver"
+                },
+                {
+                    headerName: "Bronze",
+                    field: "bronze"
+                },
+                {
+                    headerName: "Total",
+                    field: "total"
+                }
+            ],
+            rowData: rowData
+        };
+    }
+
+    render() {
+        return (
+            <div style={{ width: "100%", height: "100%" }}>
+                <div
+                    className={gridClassName}
+                    style={{
+                        height: '100%',
+                        width: '100%'
+                    }}
+                >
+                    <AgGridReact
+                        columnDefs={this.state.columnDefs}
+                        rowData={this.state.rowData}>
+                    </AgGridReact>
+                </div>
+            </div>
+        );
+    }
 }
 
 export default App;
